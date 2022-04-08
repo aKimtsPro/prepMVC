@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      th:replace="~{/layouts/layout :: layout(~{::main})}">
+
+    <th:block th:fragment="main">
+
+        <h1>Liste des personnes</h1>
+
+        <a th:href="@{/person/add}" sec:authorize="hasRole('ADMIN')">
+            <button>ajouter une personne</button>
+        </a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Prenom</th>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person:${persons}" th:object="${person}">
+                    <td th:text="*{id}">1</td>
+                    <td th:text="*{prenom}">marc</td>
+                    <td th:text="*{nom}">lemoine</td>
+                    <td>
+                        <a th:href="@{/person/{id}(id=*{id})}"><button>details</button></a>
+                        <a th:href="@{/person/{id}/update(id=*{id})}" sec:authorize="hasRole('ADMIN')"><button>update</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+</html>

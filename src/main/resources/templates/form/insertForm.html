@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{/layouts/layout :: layout(~{::main})}">
+<th:block th:fragment="main">
+
+    <form action="#" method="post"
+          th:action="@{/person/insert}"
+          th:object="${person}">
+        <div>
+            <label for="input-prenom">
+                Prenom:
+            </label>
+            <input type="text" id="input-prenom" th:field="*{prenom}">
+            <p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></p>
+        </div>
+        <div>
+            <label for="input-nom">Nom:</label>
+            <input type="text" id="input-nom" th:field="*{nom}">
+            <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></p>
+        </div>
+
+        <button type="submit">envoyer</button>
+    </form>
+
+</th:block>
+</html>
